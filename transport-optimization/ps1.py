@@ -1,7 +1,7 @@
 ###########################
 # 6.00.2x Problem Set 1: Space Cows 
 
-from ps1_partition import get_partitions
+#from ps1_partition import get_partitions
 import time
 import operator
 
@@ -164,6 +164,8 @@ print(brute_force_cow_transport(cows))
 print()
 compare_cow_transport_algorithms()
 
+
+#TESTING
 #greedy_cow_transport({'Polaris': 20, 'Louis': 45, 'Clover': 5, 'Patches': 60, 'Lotus': 10, 'Milkshake': 75, 'Horns': 50, 'Muscles': 65, 'Miss Bella': 15, 'MooMoo': 85}, 100)
 #[['MooMoo', 'Miss Bella'], ['Milkshake', 'Polaris', 'Clover'], ['Muscles', 'Lotus'], ['Patches'], ['Horns', 'Louis']]
 
