@@ -41,7 +41,6 @@ class Climate(object):
         """
         Initialize a Climate instance, which stores the temperature records
         loaded from a given csv file specified by filename.
-
         Args:
             filename: name of the csv file (str)
         """
@@ -66,17 +65,14 @@ class Climate(object):
             if month not in self.rawdata[city][year]:
                 self.rawdata[city][year][month] = {}
             self.rawdata[city][year][month][day] = temperature
-            
         f.close()
 
     def get_yearly_temp(self, city, year):
         """
         Get the daily temperatures for the given year and city.
-
         Args:
             city: city name (str)
             year: the year to get the data for (int)
-
         Returns:
             a numpy 1-d array of daily temperatures for the specified year and
             city
@@ -93,14 +89,12 @@ class Climate(object):
     def get_daily_temp(self, city, month, day, year):
         """
         Get the daily temperature for the given city and time (year + date).
-
         Args:
             city: city name (str)
             month: the month to get the data for (int, where January = 1,
                 December = 12)
             day: the day to get the data for (int, where 1st day of month = 1)
             year: the year to get the data for (int)
-
         Returns:
             a float of the daily temperature for the specified time (year +
             date) and city
@@ -110,8 +104,6 @@ class Climate(object):
         assert month in self.rawdata[city][year], "provided month is not available"
         assert day in self.rawdata[city][year][month], "provided day is not available"
         return self.rawdata[city][year][month][day]
-
-
 
 """
 End helper code
@@ -135,13 +127,11 @@ def generate_models(x, y, degs):
     for d in degs:
         model = np.polyfit(xVals,yVals,d)
         models.append(model)
-    
     return models
 
 #TESTING
 #print(generate_models([1961, 1962, 1963],[4.4, 5.5, 6.6],[1, 2]))
-#[array([ 1.10000000e+00, -2.15270000e+03]), 
-# array([ -8.86320195e-14, 1.10000000e+00, -2.15270000e+03])]
+#[array([ 1.10000000e+00, -2.15270000e+03]), array([ -8.86320195e-14, 1.10000000e+00, -2.15270000e+03])]
 
 
 # Problem 2
@@ -154,7 +144,6 @@ def r_squared(y, estimated):
     Returns:
         a float for the R-squared error term
     """
-    
     yVals = np.array(y)
     estYVals = np.array(estimated)
     error = ((estYVals - yVals)**2).sum()
@@ -166,13 +155,13 @@ def r_squared(y, estimated):
 #print(estimated)
 #print(r_squared([4.4, 5.5, 6.6], estimated))
 #print(r_squared([32.0, 42.0, 31.3, 22.0, 33.0], [32.3, 42.1, 31.2, 22.1, 34.0]))
-#0.9944
+#answer = 0.9944
 #print(r_squared([4.4, 5.5, 6.6], [4.4, 5.5, 6.6]))
-#1.000
+#answer = 1.000
 #print(r_squared([-3.1, -4.1, -9.2, 10.1], [-2.1, -6.1, 9.2, 20.1]))
-#-1.1834
+#answer = -1.1834
 #print(r_squared([-3.1, -4.1, -9.2, 10.1, 9.1, 4.5], [-1.1, -2.1, -7.2, 11.1, 11.1, 5.5]))
-#0.9414
+#answer = 0.9414
 
 
 # Problem 3
@@ -181,7 +170,6 @@ def evaluate_models_on_training(x, y, models):
     For each regression model, compute the R-square for this model with the
     standard error over slope of a linear regression line (only if the model is
     linear), and plot the data along with the best fit curve.
-
     For the plots, you should plot data points (x,y) as blue dots and your best
     fit curve (aka model) as a red solid line. You should also label the axes
     of this figure appropriately and have a title reporting the following
@@ -204,8 +192,8 @@ def evaluate_models_on_training(x, y, models):
         pylab.plot(xVals, yVals, 'o', label = 'Data')
         estYVals = np.polyval(models[i], xVals)
         error = r_squared(yVals, estYVals)
-        pylab.plot(xVals, estYVals, 'r', label = 'Fit')
-        pylab.legend(loc = 'best')
+        pylab.plot(xVals, estYVals, 'r', label='Fit')
+        pylab.legend(loc='best')
         pylab.title('R^2 = ' + str(error) + ' for degree ' + str(len(models[i])-1))
         pylab.xlabel('year')
         pylab.ylabel('temp (C)')
@@ -215,12 +203,12 @@ def evaluate_models_on_training(x, y, models):
 raw_data = Climate('data.csv')
 
 # Problem 3
-#y = []
-#x = INTERVAL_1
-#for year in INTERVAL_1:
-#    y.append(raw_data.get_daily_temp('BOSTON', 1, 10, year))
-#models = generate_models(x, y, [1])
-#evaluate_models_on_training(x, y, models)
+x = INTERVAL_1
+y = []
+for year in INTERVAL_1:
+   y.append(raw_data.get_daily_temp('BOSTON', 1, 10, year))
+models = generate_models(x, y, [1])
+evaluate_models_on_training(x, y, models)
 
 
 # Problem 4: FILL IN MISSING CODE TO GENERATE y VALUES
